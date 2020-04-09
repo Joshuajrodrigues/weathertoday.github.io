@@ -20,7 +20,7 @@ window.addEventListener("load",()=>{
     let temperatureTimezone=document.querySelector('.timezone');
     let temperatureSection=document.querySelector('.temp-section');
     let temperatureSpan=document.querySelector('.temp-section span');
-
+    let loccity=document.querySelector('.city');
     if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(position =>{
             long=position.coords.longitude;
@@ -35,7 +35,7 @@ window.addEventListener("load",()=>{
                     return respose.json();
                 })
                 .then(result =>{
-                   // console.log(result);
+                    console.log(result);
                     
                     const desp= result.data["0"].weather.description;
                     const temperature= result.data["0"].temp
@@ -45,14 +45,17 @@ window.addEventListener("load",()=>{
                     const icoid=result.data["0"].weather.icon;
                     ico=icoid+".png";
                     console.log(ico);
-                    
+                    const loc=result.data["0"].city_name;
                     //set DOM from api
                     temperatureDegree.textContent = temperature;
                     temperatureDescrip.textContent= desp;
                     temperatureTimezone.textContent=timezone;
+                    loccity.textContent=loc;
+
                     document.getElementById("imageID").src=`./icons/${ico}`;
                     //document.getElementsByClassName(".yo").src=`./icons/${ico}`;
                 });
+
 
 
         });
